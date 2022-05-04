@@ -1,0 +1,17 @@
+body{
+	background-color: rgba(119, 178, 255, 0.5);
+}
+h1{
+	text-align: center;
+	color: rgb(255, 255, 255);
+}
+.main{
+	text-align: center;
+	width: 60%;
+	margin: 50px auto;
+}
+.input-itme{
+	border-style: outset;
+	border-width: 2px 5px 5px 2px;
+	border-radius: 10px;
+}

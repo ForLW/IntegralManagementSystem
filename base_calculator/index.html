@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>进制计算器</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+	</head>
+	<body>
+		<div id="" class="header container">
+			<h1>进制计算器</h1>
+		</div>
+		<div id="" class="main container">
+			<div class="input-group input-group-lg input-itme">
+				<span class="input-group-text">输入</span>
+				<input type="text" class="form-control" id="user_input" style="width:70%">
+				<select class="form-control form-control-lg" id="input_select">
+					<option value=2>2进制</option>
+				</select>
+			</div>
+			<br>
+			<div class="input-group input-group-lg input-itme">
+				<span class="input-group-text">结果</span>
+				<input type="text" class="form-control" id="result_input" readonly style="width:70%">
+				<select class="form-control form-control-lg" id="output_select">
+					<option value=2>2进制</option>
+				</select>
+			</div>
+		</div>
+	</body>
+</html>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    print_str = [
+    '0','1','2','3','4','5','6','7','8',"9",
+    'A','B','C','D','E','F','G','H','I',"J",
+    'K','L','M','N','O','P','Q','R','S',"T",
+    'U','V','W','X','Y','Z'
+    ]
+    test_str = [
+    '0','1','2','3','4','5','6','7','8',"9",
+    'A','B','C','D','E','F','G','H','I',"J",
+    'K','L','M','N','O','P','Q','R','S',"T",
+    'U','V','W','X','Y','Z',
+    'a','b','c','d','e','f','g','h','i',"j",
+    'k','l','m','n','o','p','q','r','s',"t",
+    'u','v','w','x','y','z'
+    ]
+    
+    function x_to_num(x, base)
+    {
+        //空值
+        if (x=="")
+            return 0;
+        r = x.split(".")
+        //没有小数部分
+        if (r.length == 1)
+        {
+            temp = r[0].toUpperCase();
+            return parseInt(temp, base);
+        }
+        //有小数部分
+        else if (r.length == 2)
+        {
+            temp1 = r[0].toUpperCase();
+            temp2 = r[1].toUpperCase();
+            result = parseInt(temp1, base);
+        }
+        else
+            return "NaN";
+    }
+
+    function num_to_x(num, base)
+    {
+        return num.toString(base);
+    }
+
+    function update()
+    {
+        let input_num = $("#user_input").val();
+        let input_base = Number($("#input_select").val());
+        let output_base = Number($("#output_select").val());
+        //alert(output_base);
+        if (input_base==10)
+        {
+            $("#result_input").val(Number(input_num).toString(output_base));
+        }
+        /*else if (output_base==10)
+        {
+            if (input_num!="")
+                $("#result_input").val(x_to_num(input_num, input_base));
+            else
+                $("#result_input").val("0");
+        }*/
+        else{
+            let temp = x_to_num(input_num, input_base);
+            //console.log(temp);
+            if (temp=="NaN")
+            {
+                $("#result_input").val("输入有误");
+                return;
+            }
+            let r = num_to_x(temp, output_base);
+            $("#result_input").val(r);
+        }
+        if($("#result_input").val()=="NaN")
+            $("#result_input").val("输入有误");
+    }
+
+	$(document).ready(function(){
+		$("#input_select").empty();
+		$("#output_select").empty();
+        for(i=2;i<=36;i++)
+        {
+            $("#input_select").append("<option value="+i+">"+i+"进制</option>");
+            $("#output_select").append("<option value="+i+">"+i+"进制</option>");
+        }
+        $("#input_select").find("option[value=10]").attr("selected",true);
+        $("#output_select").find("option[value=2]").attr("selected",true);
+
+        $('#user_input').on('input propertychange', function() {
+            update();
+        });
+        $("#input_select").change(function(){
+            update();
+        });
+        $("#output_select").change(function(){
+            update();
+        });
+	});
+</script>
