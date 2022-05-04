@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>视频</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+	</head>
+	<body>
+		<div id="" class="header container">
+			<h1>视频</h1>
+		</div>
+		<div id="" class="main container">
+			<div class="input-group input-group-lg input-itme">
+				<span class="input-group-text">视频名称</span>
+				<input type="text" class="form-control" id="name_input" style="width:70%">
+                <a id="video_name_a">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                        <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+                    </svg>
+                </a>
+			</div>
+			<br>
+			<div class="input-group input-group-lg input-itme">
+				<span class="input-group-text">视频链接</span>
+				<input type="text" class="form-control" id="url_input" style="width:70%">
+                <a id="video_url_a">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                        <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+                    </svg>
+                </a>
+			</div>
+		</div>
+	</body>
+</html>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function openNewWindow(url) {
+        $('body').append($('<a href="' + url + '" target="_blank" id="openNewWindow"></a>'))
+        document.getElementById("openNewWindow").click(); //点击事件
+        $('#openNewWindow').remove();
+    }
+    $(document).ready(function(){
+        $("#video_name_a").click(function(){
+            let name = $("#name_input").val();
+            if (name=="")
+            {
+                alert("请输入视频名称");
+                return;
+            }
+            openNewWindow("https://cn.bing.com/search?q="+name);
+        });
+        $("#video_url_a").click(function(){
+            let url = $("#url_input").val();
+            if (url=="")
+            {
+                alert("请输入视频链接");
+                return;
+            }
+            alert(url);
+            openNewWindow("https://svip.bljiex.cc/?v="+url);
+        });
+    });
+</script>
